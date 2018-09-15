@@ -19,8 +19,8 @@
       <v-toolbar flat class="transparent">
         <v-list>
           <v-list-tile avatar>
-            <v-list-tile-avatar>
-              <img src="https://randomuser.me/api/portraits/men/85.jpg">
+            <v-list-tile-avatar color="white">
+              <img v-bind:src="getAvatar()">
             </v-list-tile-avatar>
 
             <v-list-tile-content>
@@ -192,6 +192,10 @@ export default {
         if (!found) subject.isUpdated = true;
         // TODO: margin
       });
+    },
+    getAvatar() {
+      if (this.additional.avatar) return this.additional.avatar;
+      return '/static/icon.png';
     },
   },
 };

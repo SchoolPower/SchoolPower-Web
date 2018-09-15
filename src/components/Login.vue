@@ -69,7 +69,6 @@ export default {
           this.$cookie.set('password', this.password, { expires: '1Y' });
           this.$router.push('/');
         });
-
     },
   },
 };
