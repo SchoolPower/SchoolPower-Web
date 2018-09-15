@@ -6,6 +6,8 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
+Vue.use(require('vue-cookie'));
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

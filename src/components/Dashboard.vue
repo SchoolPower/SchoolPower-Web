@@ -126,6 +126,9 @@ export default {
     };
   },
   created() {
+    const username = this.$cookie.get('username');
+    const password = this.$cookie.get('password');
+    if (!username || !password) this.$router.replace({ path: 'login' });
     fetch('http://127.0.0.1:8080/static/test.json')
       .then(response => response.json())
       .then((json) => {
