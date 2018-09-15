@@ -2,7 +2,7 @@
 
   <div>
     <v-list-tile :key="assignment.name" avatar>
-      <v-list-tile-content>
+      <v-list-tile-content v-bind:class="{'new-item': assignment.isUpdated}">
         <v-list-tile-title v-html="assignment.name"></v-list-tile-title>
         <v-list-tile-sub-title v-html="assignment.description"></v-list-tile-sub-title>
       </v-list-tile-content>
@@ -39,5 +39,7 @@ export default {
 </script>
 
 <style scoped>
-
+.new-item {
+  font-weight: bold;
+}
 </style>

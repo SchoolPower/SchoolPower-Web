@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-list-tile :key="subject.name" avatar @click="$emit('subject-click')">
-    <v-list-tile-content>
+    <v-list-tile-content v-bind:class="{'new-item': subject.isUpdated}">
       <v-list-tile-title v-html="subject.name"></v-list-tile-title>
       <v-list-tile-sub-title
         v-html="subject.expression+ ' ' +
@@ -40,3 +40,8 @@ export default {
 };
 </script>
 
+<style>
+  .new-item {
+    font-weight: bold;
+  }
+</style>

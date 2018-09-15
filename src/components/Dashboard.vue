@@ -24,7 +24,9 @@
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-              <v-list-tile-title>John Leider</v-list-tile-title>
+              <v-list-tile-title>
+                {{information.lastName}}, {{information.firstName}}
+              </v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn icon @click.stop="mini_drawer = !mini_drawer">
@@ -81,6 +83,7 @@
                   'pa-3': $vuetify.breakpoint.xsOnly, 'pa-5': $vuetify.breakpoint.smAndUp}"
                   class="grey lighten-4">
             <h1 class="pa-3">Dashboard</h1>
+
             <div class="subject_list mt-3">
               <v-list two-line class="grey lighten-4">
                 <subject-item v-for="subject in subjects"
@@ -116,10 +119,10 @@ export default {
   components: { CourseDetails, SubjectItem },
   data() {
     return {
-      information: [],
-      subjects: [],
-      attendances: [],
-      additional: [],
+      information: JSON.parse(localStorage.information),
+      subjects: JSON.parse(localStorage.subjects),
+      attendances: JSON.parse(localStorage.attendances),
+      additional: JSON.parse(localStorage.additional),
       drawer: true,
       mini_drawer: true,
       selectedSubject: null,
@@ -129,16 +132,68 @@ export default {
     const username = this.$cookie.get('username');
     const password = this.$cookie.get('password');
     if (!username || !password) this.$router.replace({ path: 'login' });
-    fetch('http://127.0.0.1:8080/static/test.json')
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    formData.append('os', 'web');
+    formData.append('version', '1.0.0');
+    formData.append('action', 'manual_get_data');
+    fetch('https://api.schoolpower.tech/api/2.0/get_data.php',
+      {
+        method: 'POST',
+        body: formData,
+      })
       .then(response => response.json())
       .then((json) => {
+        if (json.err === '100' || json.err === '200') {
+          this.$cookie.delete('username');
+          this.$cookie.delete('password');
+          this.$router.replace({ path: 'login' });
+          return;
+        } else if (json.err) {
+          return;
+        }
+        const newSubjects = json.sections;
+        if (this.subjects) {
+          newSubjects.forEach((subject, index) => {
+            this.markNewAssignments(subject,
+              this.subjects.find(element => element.name === subject.name));
+            newSubjects[index] = subject;
+          });
+        }
+        this.subjects = newSubjects;
         this.information = json.information;
-        this.subjects = json.sections;
         this.attendances = json.attendances;
         this.additional = json.additional;
+        if (!this.additional) this.additional = {};
+        localStorage.information = JSON.stringify(this.information);
+        localStorage.subjects = JSON.stringify(this.subjects);
+        localStorage.attendances = JSON.stringify(this.attendances);
+        localStorage.additional = JSON.stringify(this.additional);
       });
   },
-  methods: {},
+  methods: {
+    markNewAssignments(subject, subjectOld) {
+      // Mark new or changed assignments
+      const newAssignments = subject.assignments;
+      const oldAssignments = subjectOld.assignments;
+      newAssignments.forEach((item, index) => {
+        // if no item in oldAssignments has the same title, score and date as those of the new one,
+        // then the assignment should be marked.
+        let found = false;
+        oldAssignments.forEach((it) => {
+          if (it.title === item.title && it.score === item.score && it.date === item.date) {
+            found = true;
+          }
+        });
+
+        newAssignments[index].isUpdated = !found;
+        // eslint-disable-next-line no-param-reassign
+        if (!found) subject.isUpdated = true;
+        // TODO: margin
+      });
+    },
+  },
 };
 </script>
 
