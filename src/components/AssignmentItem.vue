@@ -8,9 +8,9 @@
       </v-list-tile-content>
       <v-chip v-if="assignment.percent"
               v-bind:color="gradeLetterToColor(assignment.letterGrade)"
-              text-color="white" class="elevation-5 align-end justify-center">
-        <v-avatar class="darken-4">{{assignment.letterGrade}}</v-avatar>
-        {{assignment.percent}}
+              text-color="white" class="elevation-3 align-end justify-center">
+        <strong>{{assignment.percent}}%</strong>
+        <span class="pl-1">{{assignment.score}} / {{assignment.pointsPossible}}</span>
       </v-chip>
     </v-list-tile>
     <v-divider></v-divider>

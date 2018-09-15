@@ -14,7 +14,7 @@
       mini-variant-width="60"
       v-model="drawer"
       fixed floating permanent clipped
-      class="blue lighten-2" app>
+      class="blue lighten-1" app>
 
       <v-toolbar flat class="transparent">
         <v-list>
@@ -108,35 +108,35 @@
 </template>
 
 <script>
-  import SubjectItem from './SubjectItem';
-  import CourseDetails from './CourseDetails';
+import SubjectItem from './SubjectItem';
+import CourseDetails from './CourseDetails';
 
-  export default {
-    name: 'Dashboard',
-    components: { CourseDetails, SubjectItem },
-    data() {
-      return {
-        information: [],
-        subjects: [],
-        attendances: [],
-        additional: [],
-        drawer: true,
-        mini_drawer: true,
-        selectedSubject: null,
-      };
-    },
-    created() {
-      fetch('http://127.0.0.1:8080/static/test.json')
-        .then(response => response.json())
-        .then((json) => {
-          this.information = json.information;
-          this.subjects = json.sections;
-          this.attendances = json.attendances;
-          this.additional = json.additional;
-        });
-    },
-    methods: {},
-  };
+export default {
+  name: 'Dashboard',
+  components: { CourseDetails, SubjectItem },
+  data() {
+    return {
+      information: [],
+      subjects: [],
+      attendances: [],
+      additional: [],
+      drawer: true,
+      mini_drawer: true,
+      selectedSubject: null,
+    };
+  },
+  created() {
+    fetch('http://127.0.0.1:8080/static/test.json')
+      .then(response => response.json())
+      .then((json) => {
+        this.information = json.information;
+        this.subjects = json.sections;
+        this.attendances = json.attendances;
+        this.additional = json.additional;
+      });
+  },
+  methods: {},
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

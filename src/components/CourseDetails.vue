@@ -1,12 +1,12 @@
 <template>
   <div>
     <v-layout fill-height>
-      <v-flex xs1 class="hidden-sm-and-up">
+      <v-flex xs1 class="hidden-sm-and-up mr-5">
         <v-btn flat icon class="d-inline" @click="$emit('close-click')">
           <v-icon>close</v-icon>
         </v-btn>
       </v-flex>
-      <v-flex class="mt-2 ml-5">
+      <v-flex class="mt-2">
         <h2>Assignments - {{subject.name}}</h2>
       </v-flex>
     </v-layout>
