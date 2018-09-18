@@ -177,6 +177,7 @@ export default {
       // Mark new or changed assignments
       const newAssignments = subject.assignments;
       const oldAssignments = subjectOld.assignments;
+      if (!newAssignments || !oldAssignments) return;
       newAssignments.forEach((item, index) => {
         // if no item in oldAssignments has the same title, score and date as those of the new one,
         // then the assignment should be marked.
