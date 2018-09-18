@@ -7,7 +7,7 @@
         </v-btn>
       </v-flex>
       <v-flex class="mt-2">
-        <h2>Assignments - {{subject.name}}</h2>
+        <h2>{{subject.name}}</h2>
       </v-flex>
     </v-layout>
     <div class="assignments_list mt-3">
