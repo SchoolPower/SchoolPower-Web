@@ -35,6 +35,14 @@
           <v-list-tile-title>Dashboard</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <v-list-tile @click="$router.push('/attendance')">
+        <v-list-tile-action>
+          <v-icon>beenhere</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Attendance</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
       <v-list-tile @click="$router.push('/settings')">
         <v-list-tile-action>
           <v-icon>settings</v-icon>

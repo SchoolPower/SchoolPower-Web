@@ -1,0 +1,23 @@
+export default{
+  colors: {
+    primary: '#09314b',
+    primary_dark: '#07263b',
+    primary_darker: '#061d2f',
+    primary_light: '#eeeeee',
+    accent: '#00c4cf',
+    A_score_green: '#00796B',
+    A_score_green_dark: '#006156',
+    B_score_green: '#388E3C',
+    B_score_green_dark: '#2d7230',
+    Cp_score_yellow_lighter: '#ffd180',
+    Cp_score_yellow_light: '#ffd740',
+    Cp_score_yellow: '#ffb300',
+    Cp_score_yellow_dark: '#cc8f00',
+    Cp_score_yellow_darker: '#827717',
+    C_score_orange: '#FF5722',
+    C_score_orange_dark: '#cc461b',
+    Cm_score_red: '#D32F2F',
+    Cm_score_red_dark: '#a92626',
+    gray: '#727272',
+  },
+};
