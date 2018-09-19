@@ -18,6 +18,7 @@
                   <v-text-field id="password" prepend-icon="lock" v-model="password"
                                 name="password" label="Password" type="password"></v-text-field>
                 </v-form>
+                <p>使用本网站即代表您已阅读并同意我们的<a href="https://schoolpower.tech/eula.html">最终用户协议</a>。</p>
               </v-card-text>
               <v-card-actions class="pr-4 pb-4">
                 <v-spacer></v-spacer>
