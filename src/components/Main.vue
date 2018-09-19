@@ -9,6 +9,7 @@
 <script>
 import NavigationDrawer from './NavigationDrawer';
 import store from '../store';
+import version from '../version';
 
 export default {
   name: 'Main',
@@ -30,7 +31,7 @@ export default {
       formData.append('username', username);
       formData.append('password', password);
       formData.append('os', 'web');
-      formData.append('version', '1.0.0');
+      formData.append('version', version.Version);
       formData.append('action', 'manual_get_data');
       fetch('https://api.schoolpower.tech/api/2.0/get_data.php',
         {
@@ -70,16 +71,18 @@ export default {
       // Mark new or changed assignments
       const newAssignments = subject.assignments;
       const oldAssignments = subjectOld.assignments;
-      if (!newAssignments || !oldAssignments) return;
+      if (!newAssignments) return;
       newAssignments.forEach((item, index) => {
         // if no item in oldAssignments has the same title, score and date as those of the new one,
         // then the assignment should be marked.
         let found = false;
-        oldAssignments.forEach((it) => {
-          if (it.title === item.title && it.score === item.score && it.date === item.date) {
-            found = true;
-          }
-        });
+        if (oldAssignments) {
+          oldAssignments.forEach((it) => {
+            if (it.title === item.title && it.score === item.score && it.date === item.date) {
+              found = true;
+            }
+          });
+        }
 
         newAssignments[index].isUpdated = !found;
         // eslint-disable-next-line no-param-reassign
