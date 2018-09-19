@@ -3,6 +3,13 @@
     <NavigationDrawer v-bind:information="studentInfo.information"
                       v-bind:additional="studentInfo.additional"/>
     <router-view/>
+
+    <v-snackbar v-model="snackBar" right timeout="3000">
+      {{ snakeBarText }}
+      <v-btn color="blue" flat @click="snackBar = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -17,6 +24,8 @@ export default {
   data() {
     return {
       studentInfo: store.studentInfo,
+      snackBar: false,
+      snakeBarText: '',
     };
   },
   created() {
@@ -26,6 +35,10 @@ export default {
     else this.updateGradeFromServer(username, password);
   },
   methods: {
+    showSnackBar(text) {
+      this.snakeBarText = text;
+      this.snackBar = true;
+    },
     updateGradeFromServer(username, password) {
       const formData = new FormData();
       formData.append('username', username);
@@ -65,6 +78,7 @@ export default {
           localStorage.subjects = JSON.stringify(this.studentInfo.subjects);
           localStorage.attendances = JSON.stringify(this.studentInfo.attendances);
           localStorage.additional = JSON.stringify(this.studentInfo.additional);
+          this.showSnackBar('Grades updated!');
         });
     },
     markNewAssignments(subject, subjectOld) {
