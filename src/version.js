@@ -4,4 +4,7 @@ export default {
     '添加了出勤面板',
     '修复了刷新成绩的问题',
   ],
+  store: {
+    lastShownVersion: localStorage.lastShownVersion,
+  },
 };

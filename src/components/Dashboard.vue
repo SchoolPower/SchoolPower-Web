@@ -8,21 +8,6 @@
                 class="grey lighten-4">
           <h1 class="pa-3">Dashboard</h1>
           <v-layout justify-space-between row>
-            <v-flex xs12 lg6>
-              <v-card class="pa-1">
-                <v-card-title primary-title>
-                  <h3 class="headline" style="font-size:2em">更新记录</h3>
-                </v-card-title>
-                <div class="pl-3 pb-3">
-                  <p>目前版本: {{version}}</p>
-                  <p>注意 SchoolPower Web 版仍处于 Beta 阶段，
-                    若遇到 bug 请通过邮件<a href="mailto: harryyunull@gmail.com">反馈给我们</a>。</p>
-                  <ul v-for="item in updates" v-bind:key="item">
-                    <li>{{item}}</li>
-                  </ul>
-                </div>
-              </v-card>
-            </v-flex>
             <v-flex xs12 lg5>
               <v-card>
                 <v-layout justify-space-between row>
@@ -41,6 +26,26 @@
                     </div>
                   </v-flex>
                 </v-layout>
+              </v-card>
+            </v-flex>
+            <v-flex xs12 lg6 v-if="versionStore.lastShownVersion !== version">
+              <v-card class="pa-1">
+                <v-card-title primary-title>
+                  <h3 class="headline" style="font-size:2em">更新记录</h3>
+                </v-card-title>
+                <div class="pl-3 pb-3">
+                  <p>目前版本: {{version}}</p>
+                  <p>注意 SchoolPower Web 版仍处于 Beta 阶段，
+                    若遇到 bug 请通过邮件<a href="mailto: harryyunull@gmail.com">反馈给我们</a>。</p>
+                  <ul v-for="item in updates" v-bind:key="item">
+                    <li>{{item}}</li>
+                  </ul>
+                </div>
+
+                <v-card-actions>
+                  <v-btn flat color="orange"
+                         @click="dismissUpdate()">Close</v-btn>
+                </v-card-actions>
               </v-card>
             </v-flex>
           </v-layout>
@@ -85,6 +90,7 @@ export default {
       selectedTerm: 'T1',
       version: version.Version,
       updates: version.Updates,
+      versionStore: version.store,
     };
   },
   computed: {
@@ -110,6 +116,12 @@ export default {
         });
       });
       return ret;
+    },
+  },
+  methods: {
+    dismissUpdate() {
+      this.versionStore.lastShownVersion = version.Version;
+      localStorage.lastShownVersion = version.Version;
     },
   },
 };
