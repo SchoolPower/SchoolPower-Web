@@ -29,20 +29,13 @@
                   <v-flex xs6>
                     <v-card-title primary-title>
                       <h3 class="headline mb-2" style="font-size:2em">GPA</h3>
-                      <v-select
-                        :items="terms"
-                        label="Term"
-                      ></v-select>
+                      <v-select :items="terms" label="Term" v-model="selectedTerm"></v-select>
                     </v-card-title>
                   </v-flex>
                   <v-flex xs6 class="pa-3">
                     <div>
-                      <v-progress-circular
-                        :rotate="360"
-                        :size="100"
-                        :width="15"
-                        :value="parseFloat(gpa)"
-                        color="teal"
+                      <v-progress-circular :rotate="360" :size="100" :width="15"
+                                           :value="parseFloat(gpa)" color="teal"
                       >{{gpa}}
                       </v-progress-circular>
                     </div>
@@ -89,6 +82,7 @@ export default {
     return {
       studentInfo: store.studentInfo,
       selectedSubject: null,
+      selectedTerm: 'T1',
       version: version.Version,
       updates: version.Updates,
     };
@@ -99,9 +93,9 @@ export default {
       let sum = 0;
       let num = 0;
       this.studentInfo.subjects.forEach((subject) => {
-        if (!subject.finalGrades || !subject.finalGrades.T1 || subject.finalGrades.T1 === '') return;
+        if (!subject.finalGrades || !subject.finalGrades[this.selectedTerm] || subject.finalGrades[this.selectedTerm] === '') return;
         if (subject.name.includes('Homeroom')) return;
-        sum += parseFloat(subject.finalGrades.T1.percent);
+        sum += parseFloat(subject.finalGrades[this.selectedTerm].percent);
         num += 1;
       });
       return (sum / num).toFixed(2);
