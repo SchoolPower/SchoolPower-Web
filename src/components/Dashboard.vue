@@ -1,11 +1,11 @@
 <template>
   <v-content>
     <v-container fluid fill-height class="pa-0">
-      <v-layout>
+      <v-layout class="fill-height" style="height: 100vh; min-height:100vh;">
         <v-flex v-bind:xs6="!$vuetify.breakpoint.xsOnly"
                 v-bind:class="{ hidden: selectedSubject && $vuetify.breakpoint.xsOnly,
                   'pa-3': $vuetify.breakpoint.xsOnly, 'pa-5': $vuetify.breakpoint.smAndUp}"
-                class="grey lighten-4">
+                class="grey lighten-4 scroll_area" style="flex: 1">
           <h1 class="pa-3">Dashboard</h1>
           <v-layout justify-space-between row>
             <v-flex xs12 lg5>
@@ -59,14 +59,17 @@
           </div>
         </v-flex>
 
-        <v-flex v-bind:xs6="!$vuetify.breakpoint.xsOnly" class="elevation-20 white"
-                v-bind:class="{ hidden: !selectedSubject && $vuetify.breakpoint.xsOnly,
-                  'pa-3': $vuetify.breakpoint.xsOnly, 'pa-5': $vuetify.breakpoint.smAndUp}">
-          <course-details v-if="selectedSubject"
-                          v-bind:subject="selectedSubject"
-                          @close-click="selectedSubject = null"></course-details>
-          <div v-else>
-            <h2>Select a course to view its details</h2>
+        <v-flex v-bind:xs6="!$vuetify.breakpoint.xsOnly" class="grey lighten-4 scroll_area pl-4"
+                v-bind:class="{ hidden: !selectedSubject && $vuetify.breakpoint.xsOnly}">
+          <div class="white fill-height elevation-15"
+               v-bind:class="{'pa-3': $vuetify.breakpoint.xsOnly,
+                              'pa-5': $vuetify.breakpoint.smAndUp}">
+            <course-details v-if="selectedSubject"
+                            v-bind:subject="selectedSubject"
+                            @close-click="selectedSubject = null"></course-details>
+            <div v-else>
+              <h2>Select a course to view its details</h2>
+            </div>
           </div>
         </v-flex>
       </v-layout>
@@ -151,4 +154,25 @@ export default {
     display: none;
   }
 
+  .scroll_area {
+    height: 100%;
+    overflow: auto;
+  }
+</style>
+
+<style>html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #FF0000;
+}
+  html, body {
+    overflow: hidden;
+  }
 </style>

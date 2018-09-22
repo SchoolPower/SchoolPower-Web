@@ -4,7 +4,7 @@
                       v-bind:additional="studentInfo.additional"/>
     <router-view/>
 
-    <v-snackbar v-model="snackBar" right timeout="3000">
+    <v-snackbar v-model="snackBar" right :timeout="snackBarTimeout">
       {{ snakeBarText }}
       <v-btn color="blue" flat @click="snackBar = false">
         Close
@@ -26,6 +26,7 @@ export default {
       studentInfo: store.studentInfo,
       snackBar: false,
       snakeBarText: '',
+      snackBarTimeout: 3000,
     };
   },
   created() {
