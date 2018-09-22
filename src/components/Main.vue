@@ -33,7 +33,13 @@ export default {
     const username = this.$cookie.get('username');
     const password = this.$cookie.get('password');
     if (!username || !password) this.$router.replace({ path: 'login' });
-    else this.updateGradeFromServer(username, password);
+    else {
+      const lastUpdated = this.$cookie.get('lastUpdated');
+      if (!lastUpdated || (new Date()).getTime() - parseInt(lastUpdated, 10) > 3 * 60 * 1000) {
+        this.updateGradeFromServer(username, password);
+        this.$cookie.set('lastUpdated', (new Date()).getTime());
+      }
+    }
   },
   methods: {
     showSnackBar(text) {
