@@ -22,7 +22,7 @@
               </v-card-text>
               <v-card-actions class="pr-4 pb-4">
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="login">Login</v-btn>
+                <v-btn color="primary" @click="login" id="login">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -71,6 +71,13 @@ export default {
           this.$router.push('/');
         });
     },
+  },
+  mounted() {
+    document.querySelector('#password').addEventListener('keyup', (event) => {
+      if (event.key !== 'Enter') return;
+      document.querySelector('#login').click();
+      event.preventDefault();
+    });
   },
 };
 </script>
