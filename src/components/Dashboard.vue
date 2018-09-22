@@ -13,15 +13,15 @@
               <v-layout justify-space-between row>
                 <v-flex xs12 lg5>
                   <v-card>
-                    <v-layout justify-space-between row>
+                    <v-layout row>
                       <v-flex xs6>
                         <v-card-title primary-title>
                           <h3 class="headline mb-2" style="font-size:2em">GPA</h3>
                           <v-select :items="terms" label="Term" v-model="selectedTerm"></v-select>
                         </v-card-title>
                       </v-flex>
-                      <v-flex xs6 class="pa-3">
-                        <div>
+                      <v-flex xs6 class="pt-3 pr-3">
+                        <div class="right">
                           <v-progress-circular :rotate="360" :size="100" :width="15"
                                                :value="parseFloat(gpa)" color="teal"
                           >{{gpa}}
