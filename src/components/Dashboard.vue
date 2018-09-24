@@ -3,7 +3,7 @@
     <v-container fluid fill-height class="pa-0">
       <v-layout class="fill-height" style="height: 100vh; min-height:100vh;">
         <v-flex v-bind:xs6="!$vuetify.breakpoint.xsOnly"
-                v-bind:class="{ hidden: selectedSubject && $vuetify.breakpoint.xsOnly}",
+                v-bind:class="{ hidden: selectedSubject && $vuetify.breakpoint.xsOnly}"
                 class="grey lighten-4 outer">
           <div class="middle">
             <div v-bind:class="{ 'pa-3': $vuetify.breakpoint.xsOnly,
@@ -69,7 +69,8 @@
                 v-bind:class="{ hidden: !selectedSubject && $vuetify.breakpoint.xsOnly }">
           <div class="white elevation-15"
                v-bind:class="{'pa-3': $vuetify.breakpoint.xsOnly,
-                              'pa-5': $vuetify.breakpoint.smAndUp}">
+                              'pa-5': $vuetify.breakpoint.smAndUp}"
+               style="min-height: 100%">
             <course-details v-if="selectedSubject"
                             v-bind:subject="selectedSubject"
                             @close-click="selectedSubject = null"></course-details>
