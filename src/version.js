@@ -1,7 +1,7 @@
 export default {
-  Version: '1.0.3',
+  Version: '1.0.4',
   Updates: [
-    '修复了滚动条错误',
+    '添加了 GPA 设置',
   ],
   store: {
     lastShownVersion: localStorage.lastShownVersion,

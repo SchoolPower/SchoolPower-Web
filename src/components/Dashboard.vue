@@ -101,19 +101,29 @@ export default {
       version: version.Version,
       updates: version.Updates,
       versionStore: version.store,
+      settings: store.settings,
     };
   },
   computed: {
     gpa() {
       if (!this.studentInfo.subjects) return 'N/A';
+      const additionalGrades = this.settings.additionalGPAGrades;
+      const gradeFilter = this.settings.gpaSubjects;
+
       let sum = 0;
       let num = 0;
       this.studentInfo.subjects.forEach((subject) => {
         if (!subject.finalGrades || !subject.finalGrades[this.selectedTerm] || subject.finalGrades[this.selectedTerm] === '') return;
-        if (subject.name.includes('Homeroom')) return;
+        if (gradeFilter && !gradeFilter.includes(subject.name)) return;
         sum += parseFloat(subject.finalGrades[this.selectedTerm].percent);
         num += 1;
       });
+      if (additionalGrades) {
+        additionalGrades.forEach((grade) => {
+          sum += grade;
+          num += 1;
+        });
+      }
       return (sum / num).toFixed(2);
     },
     terms() {

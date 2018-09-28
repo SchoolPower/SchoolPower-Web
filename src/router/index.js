@@ -4,6 +4,7 @@ import Dashboard from '@/components/Dashboard';
 import Attendance from '@/components/Attendance';
 import Main from '@/components/Main';
 import Login from '@/components/Login';
+import Settings from '@/components/Settings';
 
 Vue.use(Router);
 
@@ -24,6 +25,10 @@ export default new Router({
         {
           path: '/attendance',
           component: Attendance,
+        },
+        {
+          path: '/settings',
+          component: Settings,
         },
       ],
     },
