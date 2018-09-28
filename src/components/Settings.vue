@@ -74,8 +74,9 @@ export default {
     hideGPADialog(save) {
       this.showGPADialog = false;
       if (save) {
+        this.settings.additionalGPAGrades = this.additionalGPAGradesText.split(',').map(Number);
         localStorage.gpaSubjects = JSON.stringify(this.settings.gpaSubjects);
-        localStorage.additionalGPAGrades = JSON.stringify(this.additionalGPAGradesText.split(',').map(Number));
+        localStorage.additionalGPAGrades = JSON.stringify(this.settings.additionalGPAGrades);
       }
     },
   },
