@@ -113,12 +113,12 @@ export default {
       let sum = 0;
       let num = 0;
       this.studentInfo.subjects.forEach((subject) => {
-        if (!subject.finalGrades || !subject.finalGrades[this.selectedTerm] || subject.finalGrades[this.selectedTerm] === '') return;
-        if (gradeFilter && !gradeFilter.includes(subject.name)) return;
+        if (!subject.finalGrades || !subject.finalGrades[this.selectedTerm] || subject.finalGrades[this.selectedTerm].letter === '--') return;
+        if (gradeFilter.length !== 0 && !gradeFilter.includes(subject.name)) return;
         sum += parseFloat(subject.finalGrades[this.selectedTerm].percent);
         num += 1;
       });
-      if (additionalGrades) {
+      if (additionalGrades.length !== 0) {
         additionalGrades.forEach((grade) => {
           sum += grade;
           num += 1;
