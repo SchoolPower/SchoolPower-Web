@@ -90,6 +90,7 @@ export default {
     },
     markNewAssignments(subject, subjectOld) {
       // Mark new or changed assignments
+      if (!subject || !subjectOld) return;
       const newAssignments = subject.assignments;
       const oldAssignments = subjectOld.assignments;
       if (!newAssignments) return;
