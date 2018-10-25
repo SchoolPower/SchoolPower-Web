@@ -65,8 +65,9 @@
 
         </v-flex>
 
-        <v-flex v-bind:xs6="!$vuetify.breakpoint.xsOnly" class="grey lighten-4 scroll_area pl-4"
-                v-bind:class="{ hidden: !selectedSubject && $vuetify.breakpoint.xsOnly }">
+        <v-flex v-bind:xs6="!$vuetify.breakpoint.xsOnly" class="grey lighten-4 scroll_area"
+                v-bind:class="{ hidden: !selectedSubject && $vuetify.breakpoint.xsOnly,
+                'pl-4': !selectedSubject || !$vuetify.breakpoint.xsOnly }">
           <div class="white elevation-15"
                v-bind:class="{'pa-3': $vuetify.breakpoint.xsOnly,
                               'pa-5': $vuetify.breakpoint.smAndUp}"
@@ -171,7 +172,7 @@ export default {
   }
 
   .hidden {
-    display: none;
+    display: none !important;
   }
 
   .scroll_area {

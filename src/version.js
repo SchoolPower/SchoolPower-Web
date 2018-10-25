@@ -2,6 +2,7 @@ export default {
   Version: '1.0.6',
   Updates: [
     '修复了设置 GPA 时的一些 Bug',
+    '修复了手机适配',
     'Assignments 按时间倒序排序',
   ],
   store: {
