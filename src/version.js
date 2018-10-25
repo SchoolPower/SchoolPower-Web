@@ -1,8 +1,8 @@
 export default {
-  Version: '1.0.5',
+  Version: '1.0.6',
   Updates: [
-    '添加了 GPA 设置',
-    '修复了计算 GPA 时的一些 Bug',
+    '修复了设置 GPA 时的一些 Bug',
+    'Assignments 按时间倒序排序',
   ],
   store: {
     lastShownVersion: localStorage.lastShownVersion,

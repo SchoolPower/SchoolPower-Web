@@ -113,6 +113,9 @@ export default {
       let sum = 0;
       let num = 0;
       this.studentInfo.subjects.forEach((subject) => {
+        if (subject.assignments) {
+          subject.assignments.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+        }
         if (!subject.finalGrades || !subject.finalGrades[this.selectedTerm] || subject.finalGrades[this.selectedTerm].letter === '--') return;
         if (gradeFilter.length !== 0 && !gradeFilter.includes(subject.name)) return;
         sum += parseFloat(subject.finalGrades[this.selectedTerm].percent);
