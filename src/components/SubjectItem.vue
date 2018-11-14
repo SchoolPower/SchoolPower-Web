@@ -8,11 +8,11 @@
         subject.teacher.firstName + ' ' + subject.teacher.lastName">
       </v-list-tile-sub-title>
     </v-list-tile-content>
-    <v-chip v-if="subject.finalGrades && subject.finalGrades['T1']"
-            v-bind:color="gradeLetterToColor(subject.finalGrades['T1'].letter)"
+    <v-chip v-if="subject.finalGrades && subject.finalGrades[latestTerm]"
+            v-bind:color="gradeLetterToColor(subject.finalGrades[latestTerm].letter)"
             text-color="white" class="elevation-3 align-end justify-center">
-    <v-avatar class="darken-4">{{subject.finalGrades['T1'].letter}}</v-avatar>
-    {{subject.finalGrades["T1"].percent}}
+    <v-avatar class="darken-4">{{subject.finalGrades[latestTerm].letter}}</v-avatar>
+    {{subject.finalGrades[latestTerm].percent}}
   </v-chip>
   </v-list-tile>
   <v-divider></v-divider>
@@ -23,6 +23,13 @@
 export default {
   name: 'SubjectItem',
   props: ['subject'],
+  computed: {
+    latestTerm() {
+      const fg = this.subject.finalGrades;
+      const termList = ['T4', 'T3', 'T2', 'T1', 'Q4', 'Q3', 'Q2', 'Q1', 'Y1'];
+      return termList.find(it => fg[it] && fg[it].letter !== '--');
+    },
+  },
   methods: {
     gradeLetterToColor(letter) {
       return {

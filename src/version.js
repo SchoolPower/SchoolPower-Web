@@ -1,9 +1,7 @@
 export default {
-  Version: '1.0.6',
+  Version: '1.0.7',
   Updates: [
-    '修复了设置 GPA 时的一些 Bug',
-    '修复了手机适配',
-    'Assignments 按时间倒序排序',
+    '显示最新的 Term 的成绩',
   ],
   store: {
     lastShownVersion: localStorage.lastShownVersion,
