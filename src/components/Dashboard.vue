@@ -107,6 +107,12 @@ export default {
   },
   computed: {
     gpa() {
+      function latestTerm(subject) {
+        if (!subject.finalGrades) return null;
+        const fg = subject.finalGrades;
+        const termList = ['Y1', 'S2', 'S1', 'T4', 'T3', 'T2', 'T1', 'Q4', 'Q3', 'Q2', 'Q1'];
+        return termList.find(it => fg[it] && fg[it].letter !== '--');
+      }
       if (!this.studentInfo.subjects) return 'N/A';
       const additionalGrades = this.settings.additionalGPAGrades;
       const gradeFilter = this.settings.gpaSubjects;
@@ -117,9 +123,12 @@ export default {
         if (subject.assignments) {
           subject.assignments.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
         }
-        if (!subject.finalGrades || !subject.finalGrades[this.selectedTerm] || subject.finalGrades[this.selectedTerm].letter === '--') return;
+        let selectedTerm = this.selectedTerm;
+        if (this.selectedTerm === 'latest') selectedTerm = latestTerm(subject);
+        if (!subject.finalGrades || !subject.finalGrades[selectedTerm]
+            || subject.finalGrades[selectedTerm].letter === '--') return;
         if (gradeFilter.length !== 0 && !gradeFilter.includes(subject.name)) return;
-        sum += parseFloat(subject.finalGrades[this.selectedTerm].percent);
+        sum += parseFloat(subject.finalGrades[selectedTerm].percent);
         num += 1;
       });
       if (additionalGrades.length !== 0) {
@@ -139,6 +148,7 @@ export default {
           if (!ret.includes(key)) ret.push(key);
         });
       });
+      ret.push('latest');
       return ret;
     },
   },

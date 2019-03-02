@@ -4,7 +4,7 @@
     <v-list-tile :key="assignment.name">
       <v-list-tile-content v-bind:class="{'new-item': assignment.isUpdated}">
         <v-list-tile-title v-html="assignment.name"></v-list-tile-title>
-        <v-list-tile-sub-title v-html="toReadableDate(assignment.date)+'&emsp;'+assignment.category+(assignment.description?('&emsp;'+assignment.description):'')"></v-list-tile-sub-title>
+        <v-list-tile-sub-title v-html="subtitle(assignment)"></v-list-tile-sub-title>
       </v-list-tile-content>
       <v-chip v-if="assignment.percent" v-bind:color="gradeLetterToColor(assignment.letterGrade)"
               text-color="white" class="elevation-3 align-end justify-center">
@@ -39,6 +39,9 @@ export default {
     },
     toReadableDate(date) {
       return new Date(Date.parse(date)).toLocaleDateString();
+    },
+    subtitle(assignment) {
+      return `${this.toReadableDate(assignment.date)}&emsp;${assignment.category}${assignment.description ? (`&emsp;${assignment.description}`) : ''}`;
     },
   },
 };
